@@ -1,0 +1,361 @@
+[
+    {
+        "name": "Storm Marauder",
+        "avatar": "https://github.com/spacegalaxy2324/ia05_apisimulation/blob/c867cf170aaa0c03d17b71bdf54220f1315461d3/Support-Marauder_6.png",
+        "class_avatar": "assets/UI/class/Marauder_Icon_3.png",
+        "class_name": "Marauder",
+        "class_category": "tank",
+        "expansion": "ARR",
+        "id": "1"
+    },
+    {
+        "name": "Serpent Lancer",
+        "avatar": "avatar 2",
+        "class_avatar": "class_avatar 2",
+        "class_name": "Lancer",
+        "class_category": "dps",
+        "expansion": "ARR",
+        "id": "2"
+    },
+    {
+        "name": "Flame Thaumaturge",
+        "avatar": "avatar 3",
+        "class_avatar": "class_avatar 3",
+        "class_name": "Thaumaturge",
+        "class_category": "dps",
+        "expansion": "ARR",
+        "id": "3"
+    },
+    {
+        "name": "Serpent Conjurer",
+        "avatar": "avatar 4",
+        "class_avatar": "class_avatar 4",
+        "class_name": "Conjurer",
+        "class_category": "healer",
+        "expansion": "ARR",
+        "id": "4"
+    },
+    {
+        "name": "Ysayle",
+        "avatar": "avatar 5",
+        "class_avatar": "class_avatar 5",
+        "class_name": "Oracle of Frost",
+        "class_category": "allrounder",
+        "expansion": "HVS",
+        "id": "5"
+    },
+    {
+        "name": "Temple Knight",
+        "avatar": "avatar 6",
+        "class_avatar": "class_avatar 6",
+        "class_name": "Knight",
+        "class_category": "tank",
+        "expansion": "HVS",
+        "id": "6"
+    },
+    {
+        "name": "Temple Chirurgeon",
+        "avatar": "avatar 7",
+        "class_avatar": "class_avatar 7",
+        "class_name": "Chirurgeon",
+        "class_category": "healer",
+        "expansion": "HVS",
+        "id": "7"
+    },
+    {
+        "name": "Temple Banneret",
+        "avatar": "avatar 8",
+        "class_avatar": "class_avatar 8",
+        "class_name": "Banneret",
+        "class_category": "dps",
+        "expansion": "HVS",
+        "id": "8"
+    },
+    {
+        "name": "Haurchefant",
+        "avatar": "avatar 9",
+        "class_avatar": "class_avatar 9",
+        "class_name": "Chivalric Knight",
+        "class_category": "tank",
+        "expansion": "HVS",
+        "id": "9"
+    },
+    {
+        "name": "Pero Roggo",
+        "avatar": "avatar 10",
+        "class_avatar": "class_avatar 10",
+        "class_name": "Porrogo",
+        "class_category": "allrounder",
+        "expansion": "HVS",
+        "id": "10"
+    },
+    {
+        "name": "Aymeric",
+        "avatar": "avatar 11",
+        "class_avatar": "class_avatar 11",
+        "class_name": "Lord Commander",
+        "class_category": "tank",
+        "expansion": "HVS",
+        "id": "11"
+    },
+    {
+        "name": "House Fortemps Knight",
+        "avatar": "avatar 12",
+        "class_avatar": "class_avatar 12",
+        "class_name": "Knight",
+        "class_category": "tank",
+        "expansion": "HVS",
+        "id": "12"
+    },
+    {
+        "name": "House Fortemps Banneret",
+        "avatar": "avatar 13",
+        "class_avatar": "class_avatar 13",
+        "class_name": "Banneret",
+        "class_category": "dps",
+        "expansion": "HVS",
+        "id": "13"
+    },
+    {
+        "name": "House Fortemps Archer",
+        "avatar": "avatar 14",
+        "class_avatar": "class_avatar 14",
+        "class_name": "Archer",
+        "class_category": "dps",
+        "expansion": "HVS",
+        "id": "14"
+    },
+    {
+        "name": "Carvallain",
+        "avatar": "avatar 15",
+        "class_avatar": "class_avatar 15",
+        "class_name": "Marauder",
+        "class_category": "tank",
+        "expansion": "HVS",
+        "id": "15"
+    },
+    {
+        "name": "Lyse",
+        "avatar": "avatar 16",
+        "class_avatar": "class_avatar 16",
+        "class_name": "Pugilist",
+        "class_category": "dps",
+        "expansion": "STB",
+        "id": "16"
+    },
+    {
+        "name": "Gosetsu",
+        "avatar": "avatar 17",
+        "class_avatar": "class_avatar 17",
+        "class_name": "Imposing Samurai",
+        "class_category": "tank",
+        "expansion": "STB",
+        "id": "17"
+    },
+    {
+        "name": "Mol Youth",
+        "avatar": "avatar 18",
+        "class_avatar": "class_avatar 18",
+        "class_name": "Shaman",
+        "class_category": "healer",
+        "expansion": "STB",
+        "id": "18"
+    },
+    {
+        "name": "Hien",
+        "avatar": "avatar 19",
+        "class_avatar": "class_avatar 19",
+        "class_name": "Samurai",
+        "class_category": "dps",
+        "expansion": "STB",
+        "id": "19"
+    },
+    {
+        "name": "Doman Shaman",
+        "avatar": "avatar 20",
+        "class_avatar": "class_avatar 20",
+        "class_name": "Shaman",
+        "class_category": "healer",
+        "expansion": "STB",
+        "id": "20"
+    },
+    {
+        "name": "Yugiri",
+        "avatar": "avatar 21",
+        "class_avatar": "class_avatar 21",
+        "class_name": "Ninja",
+        "class_category": "dps",
+        "expansion": "STB",
+        "id": "21"
+    },
+    {
+        "name": "Doman Liberator",
+        "avatar": "avatar 22",
+        "class_avatar": "class_avatar 22",
+        "class_name": "Samurai",
+        "class_category": "dps",
+        "expansion": "STB",
+        "id": "22"
+    },
+    {
+        "name": "Resistance Fighter",
+        "avatar": "avatar 23",
+        "class_avatar": "class_avatar 23",
+        "class_name": "Gladiator",
+        "class_category": "tank",
+        "expansion": "STB",
+        "id": "23"
+    },
+    {
+        "name": "Resistance Pikedancer",
+        "avatar": "avatar 24",
+        "class_avatar": "class_avatar 24",
+        "class_name": "Pikedancer",
+        "class_category": "dps",
+        "expansion": "STB",
+        "id": "24"
+    },
+    {
+        "name": "Arenvald",
+        "avatar": "avatar 25",
+        "class_avatar": "class_avatar 25",
+        "class_name": "Gladiator",
+        "class_category": "tank",
+        "expansion": "STB",
+        "id": "25"
+    },
+    {
+        "name": "Raubahn",
+        "avatar": "avatar 26",
+        "class_avatar": "class_avatar 26",
+        "class_name": "Champion Gladiator",
+        "class_category": "dps",
+        "expansion": "STB",
+        "id": "26"
+    },
+    {
+        "name": "Alphinaud",
+        "avatar": "avatar 27",
+        "class_avatar": "class_avatar 27",
+        "class_name": "Sage",
+        "class_category": "healer",
+        "expansion": "ALL",
+        "id": "27"
+    },
+    {
+        "name": "Alisaie",
+        "avatar": "avatar 28",
+        "class_avatar": "class_avatar 28",
+        "class_name": "Red Mage",
+        "class_category": "dps",
+        "expansion": "ALL",
+        "id": "28"
+    },
+    {
+        "name": "Lyna",
+        "avatar": "avatar 29",
+        "class_avatar": "class_avatar 29",
+        "class_name": "Guard Captain",
+        "class_category": "dps",
+        "expansion": "SHB",
+        "id": "29"
+    },
+    {
+        "name": "Crystal Exarch",
+        "avatar": "avatar 30",
+        "class_avatar": "class_avatar 30",
+        "class_name": "All-Rounder",
+        "class_category": "allrounder",
+        "expansion": "ALL",
+        "id": "30"
+    },
+    {
+        "name": "Thancred",
+        "avatar": "avatar 31",
+        "class_avatar": "class_avatar 31",
+        "class_name": "Gunbreaker",
+        "class_category": "tank",
+        "expansion": "ALL",
+        "id": "31"
+    },
+    {
+        "name": "Minfilia / Ryne",
+        "avatar": "avatar 32",
+        "class_avatar": "class_avatar 32",
+        "class_name": "Oracle of Light",
+        "class_category": "dps",
+        "expansion": "SHB",
+        "id": "32"
+    },
+    {
+        "name": "Urianger",
+        "avatar": "avatar 33",
+        "class_avatar": "class_avatar 33",
+        "class_name": "Astrologian",
+        "class_category": "healer",
+        "expansion": "ALL",
+        "id": "33"
+    },
+    {
+        "name": "Y'shtola",
+        "avatar": "avatar 34",
+        "class_avatar": "class_avatar 34",
+        "class_name": "Sorceress",
+        "class_category": "dps",
+        "expansion": "ALL",
+        "id": "34"
+    },
+    {
+        "name": "Estinien",
+        "avatar": "avatar 35",
+        "class_avatar": "class_avatar 35",
+        "class_name": "Dragoon",
+        "class_category": "dps",
+        "expansion": "ALL",
+        "id": "35"
+    },
+    {
+        "name": "Venat",
+        "avatar": "avatar 36",
+        "class_avatar": "class_avatar 36",
+        "class_name": "All-Rounder",
+        "class_category": "allrounder",
+        "expansion": "ENW",
+        "id": "36"
+    },
+    {
+        "name": "Emet-Selch",
+        "avatar": "avatar 37",
+        "class_avatar": "class_avatar 37",
+        "class_name": "The Third Seat",
+        "class_category": "allrounder",
+        "expansion": "ENW",
+        "id": "37"
+    },
+    {
+        "name": "Hythlodaeus",
+        "avatar": "avatar 38",
+        "class_avatar": "class_avatar 38",
+        "class_name": "Soulseer",
+        "class_category": "dps",
+        "expansion": "ENW",
+        "id": "38"
+    },
+    {
+        "name": "Varshahn",
+        "avatar": "avatar 39",
+        "class_avatar": "class_avatar 39",
+        "class_name": "Satrap",
+        "expansion": "ENW",
+        "id": "39"
+    },
+    {
+        "name": "Zero",
+        "avatar": "avatar 40",
+        "class_avatar": "class_avatar 40",
+        "class_name": "Memoriate",
+        "class_category": "dps",
+        "expansion": "ENW",
+        "id": "40"
+    }
+]
