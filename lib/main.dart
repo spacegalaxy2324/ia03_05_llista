@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'M08 - Llista de Personatges',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0x130a37)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 19, 10, 55)),
         useMaterial3: true,
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor:
@@ -32,14 +33,15 @@ class MyApp extends StatelessWidget {
         iconTheme: IconThemeData(
             color: ColorScheme.fromSeed(seedColor: Color(0x130a37)).onPrimary),
         chipTheme: ChipThemeData(
-            labelPadding: EdgeInsets.all(0),
-            padding: EdgeInsets.all(0),
-            showCheckmark: false,
-            backgroundColor: Color.fromARGB(255, 39, 7, 91),
-            selectedColor: Color.fromARGB(255, 3, 80, 108),
-            side: BorderSide.none,
-            elevation: 3,
-            selectedShadowColor: Color.fromARGB(255, 41, 198, 255)),
+          labelPadding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(0),
+          showCheckmark: false,
+          backgroundColor: Color.fromARGB(255, 39, 7, 91),
+          selectedColor: Color.fromARGB(255, 3, 80, 108),
+          side: BorderSide.none,
+          elevation: 3,
+          selectedShadowColor: Color.fromARGB(255, 41, 198, 255),
+        ),
       ),
       home: MyHomePage(),
     );
