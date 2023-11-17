@@ -146,7 +146,7 @@ class _NPCDetailPageState extends State<NPCDetailPage> {
           digimonImage,
           Text(widget.npc.name,
               style: const TextStyle(color: Colors.black, fontSize: 32.0)),
-          Text('${widget.npc.class_name}',
+          Text(widget.npc.class_name,
               style: const TextStyle(color: Colors.black, fontSize: 20.0)),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
