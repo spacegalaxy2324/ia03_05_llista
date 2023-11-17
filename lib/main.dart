@@ -4,9 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:ia03_05_llista/add_duty_character_page.dart';
 import 'package:ia03_05_llista/npc_model.dart';
 import 'dutysupport_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'dart:convert';
 import 'dart:async';
@@ -15,7 +17,6 @@ import 'package:http/http.dart' as http;
 
 String baseUrl = 'https://654e59c7cbc325355742c905.mockapi.io/api/v1/trust/';
 String currentUrl = 'https://654e59c7cbc325355742c905.mockapi.io/api/v1/trust/';
-
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -26,51 +27,92 @@ void main() {
   runApp(const MyApp());
 }
 
+List<NPC> initialize() {
+  Future<List<NPC>> fetchedList =
+      fetchnpcs(http.Client(), '$currentUrl?expansion=ARR');
+  fetchedList.then((value) {
+    return value;
+  });
+  return [];
+}
+
+class ChangedCharacterList extends ChangeNotifier {
+  List<NPC> dutySupportCurrentList = [];
+
+  void initialize() {
+    if (dutySupportCurrentList.isEmpty) {
+      Future<List<NPC>> fetchedList =
+          fetchnpcs(http.Client(), '$currentUrl?expansion=ARR');
+      fetchedList.then((value) {
+        dutySupportCurrentList = value;
+        notifyListeners();
+      });
+    }
+  }
+
+  void addCharacterToList(NPC character) {
+    dutySupportCurrentList.add(character);
+    notifyListeners();
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'M08 - Llista de Personatges',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 19, 10, 55)),
-        useMaterial3: true,
-        textTheme: Theme.of(context).textTheme.apply(
-              bodyColor:
-                  ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
-                      .onPrimary,
-              displayColor:
-                  ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
-                      .onPrimary,
-            ),
-        iconTheme: IconThemeData(
-            color: ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
-                .onPrimary),
-        chipTheme: const ChipThemeData(
-          labelPadding: EdgeInsets.all(0),
-          padding: EdgeInsets.all(0),
-          showCheckmark: false,
-          backgroundColor: Color.fromARGB(255, 39, 7, 91),
-          selectedColor: Color.fromARGB(255, 3, 80, 108),
-          side: BorderSide.none,
-          elevation: 3,
-          selectedShadowColor: Color.fromARGB(255, 41, 198, 255),
+    return ChangeNotifierProvider(
+      create: (context) => ChangedCharacterList(),
+      child: MaterialApp(
+        title: 'M08 - Llista de Personatges',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 19, 10, 55)),
+          useMaterial3: true,
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor:
+                    ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
+                        .onPrimary,
+                displayColor:
+                    ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
+                        .onPrimary,
+              ),
+          iconTheme: IconThemeData(
+              color: ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
+                  .onPrimary),
+          chipTheme: const ChipThemeData(
+            labelPadding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(0),
+            showCheckmark: false,
+            backgroundColor: Color.fromARGB(255, 39, 7, 91),
+            selectedColor: Color.fromARGB(255, 3, 80, 108),
+            side: BorderSide.none,
+            elevation: 3,
+            selectedShadowColor: Color.fromARGB(255, 41, 198, 255),
+          ),
         ),
+        home: MyHomePage(),
       ),
-      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<ChangedCharacterList>();
+    appState.initialize();
+
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
@@ -89,40 +131,44 @@ class MyHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const CustomAppBar(),
-              CustomContent(formKey: _formKey),
+              CustomContent(
+                  formKey: _formKey, list: appState.dutySupportCurrentList),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (BuildContext context, _, __) {
+            return AddDutyCharacterPage();
+          }, transitionsBuilder:
+                  (_, Animation<double> animation, __, Widget child) {
+            return FadeTransition(opacity: animation, child: child);
+          }));
+        },
+        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFd6b475),
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
 
 class CustomContent extends StatefulWidget {
-  const CustomContent({
+  List<NPC> list = [];
+
+  CustomContent({
     super.key,
     required GlobalKey<FormBuilderState> formKey,
+    required this.list,
   }) : _formKey = formKey;
 
   final GlobalKey<FormBuilderState> _formKey;
 
   @override
   State<CustomContent> createState() => _CustomContentState();
-}
-
-Future<List<NPC>> fetchnpcs(http.Client client, String inputUrl) async {
-  final response = await client.get(Uri.parse(inputUrl));
-
-  // Use the compute function to run parsenpcs in a separate isolate.
-  return compute(parsenpcs, response.body);
-}
-
-// A function that converts a response body into a List<npc>.
-List<NPC> parsenpcs(String responseBody) {
-  final parsed =
-      (jsonDecode(responseBody) as List).cast<Map<String, dynamic>>();
-
-  return parsed.map<NPC>((json) => NPC.fromJson(json)).toList();
 }
 
 class _CustomContentState extends State<CustomContent> {
@@ -133,22 +179,23 @@ class _CustomContentState extends State<CustomContent> {
       child: Column(
         children: [
           NPCFilter(formKey: widget._formKey),
-          FutureBuilder<List<NPC>>(
-            future: fetchnpcs(http.Client(), currentUrl),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Center(
-                  child: Text('An error has occurred!'),
-                );
-              } else if (snapshot.hasData) {
-                return npcsList(npcs: snapshot.data!);
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          ),
+          npcsList(npcs: widget.list)
+          // FutureBuilder<List<NPC>>(
+          //   future: fetchnpcs(http.Client(), currentUrl),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasError) {
+          //       return const Center(
+          //         child: Text('An error has occurred!'),
+          //       );
+          //     } else if (snapshot.hasData) {
+          //       return npcsList(npcs: snapshot.data!);
+          //     } else {
+          //       return const Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     }
+          //   },
+          // ),
         ],
       ),
     );
@@ -269,11 +316,16 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-class npcsList extends StatelessWidget {
+class npcsList extends StatefulWidget {
   const npcsList({super.key, required this.npcs});
 
   final List<NPC> npcs;
 
+  @override
+  State<npcsList> createState() => _npcsListState();
+}
+
+class _npcsListState extends State<npcsList> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -283,99 +335,111 @@ class npcsList extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: npcs.length,
+          itemCount: widget.npcs.length,
           itemBuilder: (context, index) {
-            return Card(
-              elevation: 3,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {
-                  debugPrint('Card tapped.');
-                },
-                child: SizedBox(
-                  width: 300,
-                  height: 90,
-                  child: Stack(
-                    children: [
-                      CardBackground(category: npcs[index].class_category),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Image.network('${npcs[index].avatar}?raw=true'),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  npcs[index].class_avatar,
-                                  width: 25,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 2.0),
-                                  child:
-                                      Text(npcs[index].class_name.toUpperCase(),
-                                          style: GoogleFonts.playfairDisplay(
-                                            textStyle: TextStyle(
-                                                fontSize: 22,
-                                                shadows: const [
-                                                  Shadow(
-                                                      color: Colors.yellow,
-                                                      blurRadius: 4.0),
-                                                  Shadow(
-                                                      color: Colors.yellow,
-                                                      blurRadius: 4.0),
-                                                  Shadow(
-                                                      color: Colors.yellow,
-                                                      blurRadius: 4.0),
-                                                ],
-                                                color: Colors.yellow.shade100,
-                                                letterSpacing: 0.5),
-                                            //smcp as in small caps
-                                          )),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Text(
-                              npcs[index].name.toUpperCase(),
-                              style: GoogleFonts.michroma(
+            return NPCCard(npcs: widget.npcs, index: index);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class NPCCard extends StatelessWidget {
+  const NPCCard({
+    super.key,
+    required this.npcs,
+    required this.index,
+  });
+
+  final List<NPC> npcs;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        splashColor: Colors.blue.withAlpha(30),
+        onTap: () {
+          debugPrint('Card tapped.');
+        },
+        child: SizedBox(
+          width: 300,
+          height: 90,
+          child: Stack(
+            children: [
+              CardBackground(category: npcs[index].class_category),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.network('${npcs[index].avatar}?raw=true'),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          npcs[index].class_avatar,
+                          width: 25,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2.0),
+                          child: Text(npcs[index].class_name.toUpperCase(),
+                              style: GoogleFonts.playfairDisplay(
                                 textStyle: TextStyle(
-                                    fontSize: 18,
-                                    shadows: [
-                                      const Shadow(
-                                          color: Colors.yellow,
-                                          blurRadius: 4.0),
-                                      const Shadow(
+                                    fontSize: 22,
+                                    shadows: const [
+                                      Shadow(
                                           color: Colors.yellow,
                                           blurRadius: 4.0),
                                       Shadow(
-                                          color: Colors.yellow.shade800,
+                                          color: Colors.yellow,
                                           blurRadius: 4.0),
-                                      const Shadow(
-                                          color: Colors.black,
-                                          blurRadius: 10.0),
+                                      Shadow(
+                                          color: Colors.yellow,
+                                          blurRadius: 4.0),
                                     ],
                                     color: Colors.yellow.shade100,
                                     letterSpacing: 0.5),
-                                //smcp as
-                              ),
-                            )
-                          ],
+                                //smcp as in small caps
+                              )),
                         ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Text(
+                      npcs[index].name.toUpperCase(),
+                      style: GoogleFonts.michroma(
+                        textStyle: TextStyle(
+                            fontSize: 18,
+                            shadows: [
+                              const Shadow(
+                                  color: Colors.yellow, blurRadius: 4.0),
+                              const Shadow(
+                                  color: Colors.yellow, blurRadius: 4.0),
+                              Shadow(
+                                  color: Colors.yellow.shade800,
+                                  blurRadius: 4.0),
+                              const Shadow(
+                                  color: Colors.black, blurRadius: 10.0),
+                            ],
+                            color: Colors.yellow.shade100,
+                            letterSpacing: 0.5),
+                        //smcp as
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
-            );
-          },
+            ],
+          ),
         ),
       ),
     );
