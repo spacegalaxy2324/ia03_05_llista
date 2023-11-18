@@ -189,7 +189,7 @@ class _CustomContentState extends State<CustomContent> {
       child: Column(
         children: [
           NPCFilter(formKey: widget._formKey),
-          npcsList(npcs: widget.list)
+          npcsList(npcs: widget.list),
         ],
       ),
     );
@@ -244,7 +244,7 @@ class NPCFilter extends StatelessWidget {
                     FormBuilderChipOption(
                       value: 'HVW',
                       child: Image.asset(
-                        'assets/UI/hvw.png',
+                        'assets/UI/hvs.png',
                         scale: 1.5,
                       ),
                     ),
@@ -326,7 +326,7 @@ class _npcsListState extends State<npcsList> {
       child: Padding(
         padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 0.0),
         child: ListView.builder(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.only(bottom: 50),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: widget.npcs.length,

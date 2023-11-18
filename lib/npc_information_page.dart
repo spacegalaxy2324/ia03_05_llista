@@ -14,7 +14,7 @@ Widget readableExpansion(String expansion) {
     case 'ARR':
       fullExpansionName = "A Realm Reborn";
       break;
-    case 'HVW':
+    case 'HVS':
       fullExpansionName = "Heavensward";
       break;
     case 'STB':
