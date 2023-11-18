@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ia03_05_llista/main.dart';
@@ -70,6 +71,8 @@ class AddDutyCharacterPage extends StatelessWidget {
                     SizedBox(height: 10),
                     ElevatedButton(
                         onPressed: () {
+                          AudioPlayer()
+                              .play(AssetSource('sfx/FFXIV_Notification.mp3'));
                           Future<List<NPC>> fetchedList = fetchnpcs(
                               http.Client(),
                               '$currentUrl?name=${myController.text}');

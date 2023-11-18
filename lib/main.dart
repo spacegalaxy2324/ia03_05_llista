@@ -1,10 +1,12 @@
 // ignore_for_file: camel_case_types
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ia03_05_llista/add_duty_character_page.dart';
+import 'package:ia03_05_llista/npc_information_page.dart';
 import 'package:ia03_05_llista/npc_model.dart';
 import 'dutysupport_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +19,7 @@ import 'package:http/http.dart' as http;
 
 String baseUrl = 'https://654e59c7cbc325355742c905.mockapi.io/api/v1/trust/';
 String currentUrl = 'https://654e59c7cbc325355742c905.mockapi.io/api/v1/trust/';
+
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -48,6 +51,12 @@ class ChangedCharacterList extends ChangeNotifier {
         notifyListeners();
       });
     }
+  }
+
+  void updateRating(NPC npc, int newValue) {
+    int index = dutySupportCurrentList.indexOf(npc);
+    dutySupportCurrentList[index].rating = newValue;
+    notifyListeners();
   }
 
   void addCharacterToList(NPC character) {
@@ -139,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          AudioPlayer().play(AssetSource('sfx/FFXIV_Open_Window.mp3'));
           Navigator.of(context).push(PageRouteBuilder(
               pageBuilder: (BuildContext context, _, __) {
             return AddDutyCharacterPage();
@@ -180,22 +190,6 @@ class _CustomContentState extends State<CustomContent> {
         children: [
           NPCFilter(formKey: widget._formKey),
           npcsList(npcs: widget.list)
-          // FutureBuilder<List<NPC>>(
-          //   future: fetchnpcs(http.Client(), currentUrl),
-          //   builder: (context, snapshot) {
-          //     if (snapshot.hasError) {
-          //       return const Center(
-          //         child: Text('An error has occurred!'),
-          //       );
-          //     } else if (snapshot.hasData) {
-          //       return npcsList(npcs: snapshot.data!);
-          //     } else {
-          //       return const Center(
-          //         child: CircularProgressIndicator(),
-          //       );
-          //     }
-          //   },
-          // ),
         ],
       ),
     );
@@ -215,8 +209,8 @@ class NPCFilter extends StatelessWidget {
     return FormBuilder(
         onChanged: () => {
               _formKey.currentState?.saveAndValidate(),
-              currentUrl = "$baseUrl?expansion=" +
-                  _formKey.currentState?.value["choice_chips"],
+              currentUrl =
+                  "$baseUrl?expansion=${_formKey.currentState?.value["choice_chips"]}",
               debugPrint(currentUrl),
               debugPrint(_formKey.currentState?.value["choice_chips"])
             },
@@ -363,6 +357,14 @@ class NPCCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.blue.withAlpha(30),
         onTap: () {
+          AudioPlayer().play(AssetSource('sfx/FFXIV_Open_Window.mp3'));
+          Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (BuildContext context, _, __) {
+            return NPCInformationPage(npc: npcs[index]);
+          }, transitionsBuilder:
+                  (_, Animation<double> animation, __, Widget child) {
+            return FadeTransition(opacity: animation, child: child);
+          }));
           debugPrint('Card tapped.');
         },
         child: SizedBox(
@@ -413,7 +415,17 @@ class NPCCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                    Text(
+                      npcs[index].rating.toString(),
+                      style: GoogleFonts.michroma(
+                        textStyle: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 29.5,
+                            color: Colors.black45,
+                            letterSpacing: 0.5),
+                        //smcp as
+                      ),
+                    ),
                     Text(
                       npcs[index].name.toUpperCase(),
                       style: GoogleFonts.michroma(

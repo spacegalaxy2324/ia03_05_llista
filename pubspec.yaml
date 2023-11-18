@@ -41,6 +41,7 @@ dependencies:
   http: ^1.1.0
   google_fonts: ^6.1.0
   provider: ^6.1.1
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - assets/UI/ 
     - assets/UI/class/
     - assets/UI/role/
+    - assets/sfx/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
