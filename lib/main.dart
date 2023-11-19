@@ -4,11 +4,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ia03_05_llista/pages/add_duty_npc_page.dart';
-import 'package:ia03_05_llista/pages/duty_npc_information_page.dart';
 import 'package:ia03_05_llista/models/duty_npc_model.dart';
 import 'widget/duty_npc_list.dart';
 import 'dutysupport_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -51,15 +49,6 @@ class ChangedCharacterList extends ChangeNotifier {
   }
 }
 
-List<NPC> initialize() {
-  Future<List<NPC>> fetchedList =
-      fetchnpcs(http.Client(), '$currentUrl?expansion=ARR');
-  fetchedList.then((value) {
-    return value;
-  });
-  return [];
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -85,16 +74,6 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(
               color: ColorScheme.fromSeed(seedColor: const Color(0x00130a37))
                   .onPrimary),
-          chipTheme: const ChipThemeData(
-            labelPadding: EdgeInsets.all(0),
-            padding: EdgeInsets.all(0),
-            showCheckmark: false,
-            backgroundColor: Color.fromARGB(255, 39, 7, 91),
-            selectedColor: Color.fromARGB(255, 3, 80, 108),
-            side: BorderSide.none,
-            elevation: 3,
-            selectedShadowColor: Color.fromARGB(255, 41, 198, 255),
-          ),
         ),
         home: const MyHomePage(),
       ),
