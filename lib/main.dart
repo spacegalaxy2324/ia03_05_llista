@@ -29,7 +29,7 @@ class ChangedCharacterList extends ChangeNotifier {
   void initialize() {
     if (dutySupportCurrentList.isEmpty) {
       Future<List<NPC>> fetchedList =
-          fetchnpcs(http.Client(), '$currentUrl?expansion=ARR');
+          fetchNpcList(http.Client(), '$currentUrl?expansion=ARR');
       fetchedList.then((value) {
         dutySupportCurrentList = value;
         notifyListeners();

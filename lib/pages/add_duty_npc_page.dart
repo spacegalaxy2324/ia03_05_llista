@@ -13,15 +13,15 @@ import 'package:http/http.dart' as http;
 
 String currentUrl = 'https://654e59c7cbc325355742c905.mockapi.io/api/v1/trust/';
 
-Future<List<NPC>> fetchnpcs(http.Client client, String inputUrl) async {
+Future<List<NPC>> fetchNpcList(http.Client client, String inputUrl) async {
   final response = await client.get(Uri.parse(inputUrl));
 
   // Use the compute function to run parsenpcs in a separate isolate.
-  return compute(parsenpcs, response.body);
+  return compute(parseNpcList, response.body);
 }
 
 // A function that converts a response body into a List<npc>.
-List<NPC> parsenpcs(String responseBody) {
+List<NPC> parseNpcList(String responseBody) {
   final parsed =
       (jsonDecode(responseBody) as List).cast<Map<String, dynamic>>();
 
@@ -74,7 +74,7 @@ class AddDutyCharacterPage extends StatelessWidget {
                         onPressed: () {
                           AudioPlayer()
                               .play(AssetSource('sfx/FFXIV_Notification.mp3'));
-                          Future<List<NPC>> fetchedList = fetchnpcs(
+                          Future<List<NPC>> fetchedList = fetchNpcList(
                               http.Client(),
                               '$currentUrl?name=${myController.text}');
                           fetchedList.then((value) {
