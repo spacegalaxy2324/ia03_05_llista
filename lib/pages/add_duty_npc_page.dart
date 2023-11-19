@@ -6,7 +6,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ia03_05_llista/main.dart';
-import 'package:ia03_05_llista/npc_model.dart';
+import 'package:ia03_05_llista/models/duty_npc_model.dart';
 import 'package:provider/provider.dart';
 
 import 'package:http/http.dart' as http;
@@ -64,11 +64,12 @@ class AddDutyCharacterPage extends StatelessWidget {
                     TextField(
                       controller: myController,
                       decoration: const InputDecoration(
+                        labelStyle: TextStyle(color: Colors.white60),
                         border: OutlineInputBorder(),
                         labelText: 'Write a Duty Support character here',
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                         onPressed: () {
                           AudioPlayer()
@@ -83,10 +84,10 @@ class AddDutyCharacterPage extends StatelessWidget {
                         },
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFFd6b475)),
+                                const Color(0xFFd6b475)),
                             foregroundColor:
                                 MaterialStateProperty.all<Color>(Colors.white)),
-                        child: Text('Add new character'))
+                        child: const Text('Add new character'))
                   ],
                 ),
               ),

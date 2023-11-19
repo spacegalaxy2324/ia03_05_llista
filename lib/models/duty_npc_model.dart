@@ -1,8 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
-
-import 'dart:convert';
-import 'dart:io';
-import 'dart:async';
+// ignore_for_file: unnecessary_null_comparison, non_constant_identifier_names
 
 class NPC {
   final String name;

@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ia03_05_llista/main.dart';
-import 'package:ia03_05_llista/npc_model.dart';
+import 'package:ia03_05_llista/models/duty_npc_model.dart';
 import 'package:provider/provider.dart';
 
 Widget readableExpansion(String expansion) {
@@ -25,6 +25,9 @@ Widget readableExpansion(String expansion) {
       break;
     case 'ENW':
       fullExpansionName = "Endwalker";
+      break;
+    case 'ALL':
+      fullExpansionName = "Main Character";
       break;
     default:
       break;
@@ -142,7 +145,7 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                               widget.npc.class_avatar,
                               width: 50,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Flexible(
                               child: Text(
                                 widget.npc.name.toUpperCase(),
@@ -170,7 +173,7 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
                           decoration: const BoxDecoration(
                               color: Colors.black87,
@@ -184,7 +187,7 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Column(
                           children: [
                             Row(
@@ -258,7 +261,7 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                                             blurRadius: 10.0),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text('${widget.npc.rating} / 10',
@@ -290,7 +293,7 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                             ),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Slider(
                           activeColor: const Color(0xFFd6b475),
                           value: _currentSliderValue,
@@ -309,7 +312,7 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text('${_currentSliderValue.toInt().toString()}',
+                              Text(_currentSliderValue.toInt().toString(),
                                   style: GoogleFonts.michroma(
                                     textStyle: TextStyle(
                                         fontSize: 35,
@@ -357,15 +360,15 @@ class _NPCInformationPageState extends State<NPCInformationPage> {
                                   style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
-                                              Color(0xFFd6b475)),
+                                              const Color(0xFFd6b475)),
                                       foregroundColor:
                                           MaterialStateProperty.all<Color>(
                                               Colors.white)),
-                                  child: Text('Submit Commendation')),
+                                  child: const Text('Submit Commendation')),
                             ],
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ]),
                 ),
               ),
